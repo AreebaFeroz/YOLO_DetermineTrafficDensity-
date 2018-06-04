@@ -1,0 +1,106 @@
+#:include connected.kv
+
+<Login>:
+
+    myusername: login
+    mypassword: password
+
+    BoxLayout
+        id: login_layout
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+
+        canvas.before:
+            BorderImage:
+                                #background image
+                border: 10, 10, 10, 10
+                source: 'interface-images/trafficlight12.png'
+                pos: self.pos
+                size: 950,630
+
+
+        Label:
+            text: 'Vision Based Traffic Light Control'
+            font_size: 38
+            color: 0,0,0,1
+
+
+        BoxLayout:
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: [10,50,10,50]
+                spacing: 50
+                height: "700dp"
+                canvas.before:
+                    BorderImage:        #side image of 3 cars
+                        border: 10, 10, 10, 10
+                        source: 'interface-images/trafficlight7.png'
+                        pos: self.pos
+                        size: 420,420
+
+            BoxLayout:
+                orientation: 'horizontal'
+                padding: [10,50,10,50]
+                spacing: 50
+                height: "700dp"
+
+                BoxLayout:
+                    orientation: 'vertical'
+                    size_hint_y: None
+                    height: "250dp"
+
+
+                    Label:
+                        text: 'Login'
+                        font_size: 24
+                        halign: 'left'
+                        text_size: root.width,24
+                        color: 0,0,0,1
+                        padding_x:250
+
+                    TextInput:
+                        id: login
+                        multiline:False
+                        font_size: 28
+                        halign: 'right'
+                        #hint_text: 'admin'
+                        #cursor_blink: True
+                        #focus:True
+                        text: 'admin'
+
+                    Label:
+                        text: 'Password'
+                        halign: 'left'
+                        font_size: 24
+                        text_size: root.width, 24
+                        color: 0,0,0,1
+                        padding_x:250
+
+                    TextInput:
+                        id: password
+                        multiline:False
+                        password:True
+                        font_size: 28
+                        halign: 'right'
+                        #cursor_blink: True
+                        #focus:True
+                        #hint_text:'admin'
+                        text:'admin'
+
+                    Label:
+                        font_size: 18
+                        id: label1
+                        color: 0,0,0,1
+
+
+
+
+                    Button:
+                        text: 'Connect'
+                        font_size: 24
+
+                        on_press: root.do_login()
+
+

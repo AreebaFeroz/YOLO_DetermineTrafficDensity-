@@ -1,0 +1,185 @@
+#:include login.kv
+#:include options.kv
+#:include records.kv
+
+<Connected>:
+    streeta: ''
+    streetb: ''
+    streetc: ''
+    streetd: ''
+    BoxLayout
+
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+                                            # FIRST SECTION
+        BoxLayout:
+            orientation: 'vertical'
+            Label:
+                text: 'Start Monitoring Traffic'
+                font_size: 32
+                color: 0,0,0,1
+
+            BoxLayout:
+
+                padding: [360,0,380,0]
+
+                Button:
+
+                    text: ""
+                    size: 170,110
+
+                    on_press: root.showImg()
+                    Image:
+                        source:'interface-images/trafficlight13.png'
+                        pos: self.parent.x + 15, self.parent.y - 30
+                        size: 160,105
+
+
+                                        # SECOND SECTION
+        BoxLayout:
+
+
+            orientation: 'horizontal'
+
+            spacing: 10
+            height: "100dp"
+            BoxLayout:
+
+                canvas:
+                    BorderImage:
+                        source:root.streeta
+                        pos: self.x , self.y
+                        size: 250,130
+
+                    BorderImage:
+                        source:'interface-images/trafficlight15.png'
+                        size: 50,50
+                        pos: self.parent.x+250 , self.parent.y
+
+
+                    BorderImage:
+                        source:'interface-images/trafficlight16.png'
+                        size: 50,50
+                        pos: self.parent.x+300 , self.parent.y
+
+
+                    BorderImage
+                        source: 'interface-images/trafficlight17.png'
+                        size: 140,80
+                        pos: self.parent.x+250 , self.parent.y+40
+
+            BoxLayout:
+
+                canvas:
+                    BorderImage:
+                        source: root.streetb
+                        pos: self.x , self.y
+                        size: 250,130
+
+                    BorderImage:
+                        source:'interface-images/trafficlight15.png'
+                        size: 50,50
+                        pos: self.parent.x+720 , self.parent.y
+
+
+                    BorderImage:
+                        source:'interface-images/trafficlight16.png'
+                        size: 50,50
+                        pos: self.parent.x+770 , self.parent.y
+
+
+                    BorderImage
+                        source: 'interface-images/trafficlight17.png'
+                        size: 140,80
+                        pos: self.parent.x+725 , self.parent.y+40
+
+
+
+                                # THIRD SECTION
+        BoxLayout:
+
+
+            orientation: 'horizontal'
+            spacing: 10
+            height: "100dp"
+            BoxLayout:
+
+                canvas:
+
+                    BorderImage:
+                        source:root.streetc
+                        pos: self.x , self.y
+                        size: 250,130
+
+                    BorderImage:
+                        source:'interface-images/trafficlight15.png'
+                        size: 50,50
+                        pos: self.parent.x+250 , self.parent.y
+
+                    BorderImage:
+                        source:'interface-images/trafficlight16.png'
+                        size: 50,50
+                        pos: self.parent.x+300 , self.parent.y
+
+
+                    BorderImage
+                        source: 'interface-images/trafficlight17.png'
+                        size: 140,80
+                        pos: self.parent.x+250 , self.parent.y+40
+
+
+            BoxLayout:
+
+                canvas:
+                    BorderImage:
+                        source: root.streetd
+                        pos: self.x , self.y
+                        size: 250,130
+
+                    BorderImage:
+                        source:'interface-images/trafficlight15.png'
+                        size: 50,50
+                        pos: self.parent.x+720 , self.parent.y
+
+
+                    BorderImage:
+                        source:'interface-images/trafficlight16.png'
+                        size: 50,50
+                        pos: self.parent.x+770 , self.parent.y
+
+                    BorderImage
+                        source: 'interface-images/trafficlight17.png'
+                        size: 140,80
+                        pos: self.parent.x+725 , self.parent.y+40
+
+
+                                # FOURTH SECTION
+        BoxLayout:
+            height:"100dp"
+            padding: [75,20,75,20]
+            spacing: 15
+            Button:
+                text: '  Show Records'
+                font_size: 24
+                on_press: root.showRecords()
+                Image:
+                    source:'interface-images/records.png'
+                    pos: self.parent.x+2 , self.parent.y+3
+                    size: 50,50
+
+
+            Button:
+                text: 'More Options'
+                font_size: 24
+
+                on_press: root.clickOptions()
+
+            Button:
+                text: 'Logout'
+                font_size: 24
+
+                on_press: root.disconnect()
+
+

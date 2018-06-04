@@ -1,0 +1,139 @@
+#:include connected.kv
+#:include login.kv
+#:include records.kv
+<Options>:
+
+    BoxLayout
+
+        orientation: 'vertical'
+        padding: [10,50,10,50]
+        spacing: 50
+
+        canvas.before:
+            BorderImage:
+                # BorderImage behaves like the CSS BorderImage
+                border: 10, 10, 10, 10
+                source: 'interface-images/trafficlight6.png'
+                pos: self.x + 620, self.y + 0
+                size: 500,650
+
+
+        BoxLayout:
+            orientation: 'vertical'
+            height:"100dp"
+
+            Label:
+                text: 'More Options'
+                font_size: 32
+                color: 0,0,0,1
+
+            BoxLayout:
+                canvas:
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 150, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 230, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 310, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 390, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 470, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 550, self.y - 25
+                        size: 80,80
+                    BorderImage:
+                        source: 'interface-images/sign3.png'
+                        pos: self.x + 630, self.y - 25
+                        size: 80,80
+
+
+        BoxLayout:
+
+
+            BoxLayout:
+                orientation: 'vertical'
+                spacing: 10
+
+
+                Button:
+                    text: 'TOTAL VEHICLES'
+                    font_size: 24
+                    on_press: root.showCount()
+
+                Button:
+                    text: 'DENSITY'
+                    font_size: 24
+                    on_press: root.showDensity()
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                spacing: 10
+                height: "100dp"
+
+                Button:
+                    text: 'TRAFFIC FLOW'
+                    font_size: 24
+                    on_press: root.showTrafficFlow()
+
+                Button:
+                    text: 'GREEN LIGHT DURATION'
+                    font_size: 24
+                    on_press: root.showGreenDur()
+
+            BoxLayout:
+                orientation: 'vertical'
+
+                spacing: 10
+                height: "100dp"
+
+                Button:
+                    text: 'CONGESTION'
+                    font_size: 24
+                    on_press: root.showCongestion()
+
+                Button:
+                    text: 'HEAVIEST FLOW'
+                    font_size: 24
+                    on_press: root.showHeaviestFlow()
+
+
+        BoxLayout:
+
+            Label:
+                id: my_label
+                text: 'output will be shown here on clicking any button'
+                font_size: 24
+                color: 0,0,0,1
+
+
+
+        BoxLayout:
+            padding: [55,20,55,20]
+            spacing: 15
+
+            Button:
+                text: 'Back'
+                font_size: 24
+
+                on_press: root.optionsBack()
+
+
+
+            Button:
+                text: 'Logout'
+                font_size: 24
+
+                on_press: root.optionsLogout()
