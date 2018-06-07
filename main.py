@@ -22,7 +22,6 @@ Window.size = 950,650         # window size
 
 class Login(Screen):
 
-
     def do_login(self):
         app = App.get_running_app()
 
@@ -57,6 +56,8 @@ class Login(Screen):
 class LoginApp(App):
     username = StringProperty(None)
     password = StringProperty(None)
+
+    App.title='Vision based Traffic Light control'
 
     def build(self):
         manager = ScreenManager()
