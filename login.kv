@@ -1,5 +1,5 @@
 #:include connected.kv
-
+#:include live.kv
 <Login>:
 
     myusername: login
@@ -64,10 +64,6 @@
                         id: login
                         multiline:False
                         font_size: 28
-                        halign: 'right'
-                        #hint_text: 'admin'
-                        #cursor_blink: True
-                        #focus:True
                         text: 'admin'
 
                     Label:
@@ -80,14 +76,12 @@
 
                     TextInput:
                         id: password
-                        multiline:False
                         password:True
                         font_size: 28
                         halign: 'right'
-                        #cursor_blink: True
-                        #focus:True
-                        #hint_text:'admin'
-                        text:'admin'
+                        focus:True
+                        hint_text:'admin'
+                        #text: 'admin'
 
                     Label:
                         font_size: 18
@@ -102,5 +96,6 @@
                         font_size: 24
 
                         on_press: root.do_login()
+                        on_release: root.resetForm()
 
 

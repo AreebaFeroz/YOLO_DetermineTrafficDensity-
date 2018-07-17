@@ -22,7 +22,7 @@ def generateImageArray():
     img_data = []
     for x in range(0,4):
         randNo = random.randint(1, 15)
-        imgPath = r"D:\Areeba\University\FYP\WORK\code\Count Code\YOLO_DetermineTrafficDensity--master\YOLO_DetermineTrafficDensity--master\sample_img\%s.jpg" % (randNo)
+        imgPath = r"C:\Users\areeba feroz\Documents\MyFiles\fyp\darkflow-master\test2\sample_img\%s.jpg" % (randNo)
         img_data.append (imgPath)
         print(imgPath)
     return img_data

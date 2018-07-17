@@ -1,26 +1,12 @@
 from kivy.uix.screenmanager import Screen, SlideTransition
-
-
-from kivy.uix.widget import Widget
-from kivy.uix.boxlayout import BoxLayout
-from kivy.uix.button import Button
-from kivy.uix.dropdown import DropDown
-from kivy.uix.spinner import Spinner
-from kivy.properties import ListProperty, StringProperty, BooleanProperty
-
-
-
-
-
-
-
-# import time
-# import random
-# from kivy.clock import Clock
-# from kivy.properties import ObjectProperty
-# import cv2
+import datetime
+import random
+#from kivy.clock import Clock
+from kivy.properties import ObjectProperty
+import cv2
+import sqlite3
 # from darkflow.net.build import TFNet
-
+#
 # options = {
 #     'model': 'cfg/yolo.cfg',
 #     'load': 'bin/yolov2.weights',
@@ -29,6 +15,17 @@ from kivy.properties import ListProperty, StringProperty, BooleanProperty
 # }
 # tfnet = TFNet(options)
 # # read the color image and covert to RGB
+#
+# def calDensity(count, length):
+#     return ((count * 1000) / length)
+#
+#
+# def calCongestion(time1, time2):
+#     return (time2.__sub__(time1)).seconds
+#
+#
+# def calTrafficFlow(count,greenDur):
+#     return (count/greenDur)
 #
 # def generateImageArray():
 #     img_data = []
@@ -81,135 +78,67 @@ class Connected(Screen):
         self.manager.current = 'records'
 
     def showImg(self):
+        pass
         #self.ids.image.source = imgpath
-       pass
-
-#     def on_enter(self, *args):
-# #        self.streeta = imgpath
-#     #    Clock.schedule_interval(self., 1.0 / 60.0)
-#         w, h = 2, 4;
-#         density = [[0 for x in range(w)] for y in range(h)]
-#
-#         img_data = ObjectProperty()
-#         img_data = generateImageArray()
-#
-#         self.streeta = img_data[0]
-#         self.streetb = img_data[1]
-#         self.streetc = img_data[2]
-#         self.streetd = img_data[3]
-#
-#
-#
-#         for x in range(0, 4):
-#             imgCountVar = countVehicles(img_data[x]);
-#             density[x][0] = imgCountVar;
-#             density[x][1] = x;
-#         print(density)
-#         density.sort(key=lambda x: x[0], reverse=True)
-#         print(density)
-#         timeAllot = [0 for x in range(4)]
-#
-#         for i in range(0, 4):
-#             if (density[i][0] <= 3):
-#                 timeAllot[i] = 5
-#             elif (density[i][0] > 3 and density[i][0] <= 5):
-#                 timeAllot[i] = 15
-#             elif (density[i][0] > 5):
-#                 timeAllot[i] = 30
-#         print(timeAllot)
-#
-#         for i in range(0, 4):
-#             print('Road No: ' + str(density[i][1]) + ' Go GREEN for ' + str(timeAllot[i]) + 'seconds')
-#             time.sleep(timeAllot[i])
-
-
-
-
-
-
-
-                 ############ DROP DOWN ##################
-
-
-class MenuItem(Widget):
-    background_color_normal = ListProperty([0.2, 0.2, 0.2, 1])
-    background_color_down = ListProperty([0.3, 0.3, 0.3, 1])
-    background_color = ListProperty([])
-    separator_color = ListProperty([0.8, 0.8, 0.8, 1])
-    text_color = ListProperty([1,1,1,1])
-    inside_group = BooleanProperty(False)
-    pass
-
-class MenuSubmenu(MenuItem, Spinner):
-    triangle = ListProperty()
-
-    def __init__(self, **kwargs):
-        self.list_menu_item = []
-        super().__init__(**kwargs)
-        self.dropdown_cls = MenuDropDown
-
-    def add_widget(self, item):
-        self.list_menu_item.append(item)
-        self.show_submenu()
-
-    def show_submenu(self):
-        self.clear_widgets()
-        for item in self.list_menu_item:
-            item.inside_group = True
-            self._dropdown.add_widget(item)
-
-    def _build_dropdown(self, *largs):
-        if self._dropdown:
-            self._dropdown.unbind(on_dismiss=self._toggle_dropdown)
-            self._dropdown.dismiss()
-            self._dropdown = None
-        self._dropdown = self.dropdown_cls()
-        self._dropdown.bind(on_dismiss=self._toggle_dropdown)
-
-    def _update_dropdown(self, *largs):
-        pass
-
-    def _toggle_dropdown(self, *largs):
-        self.is_open = not self.is_open
-        ddn = self._dropdown
-        ddn.size_hint_x = None
-        if not ddn.container:
-            return
-        children = ddn.container.children
-        if children:
-            ddn.width = max(self.width, max(c.width for c in children))
-        else:
-            ddn.width = self.width
-        for item in children:
-            item.size_hint_y = None
-            item.height = max([self.height, 48])
-
-    def clear_widgets(self):
-        self._dropdown.clear_widgets()
-
-class MenuDropDown(DropDown):
-        pass
-
-class MenuButton(MenuItem,Button):
-    icon = StringProperty(None, allownone=True)
-    pass
-
-class MenuEmptySpace(MenuItem):
-    pass
-
-class MenuBar(BoxLayout):
-
-    background_color = ListProperty([0.2, 0.2, 0.2, 1])
-    separator_color = ListProperty([0.8, 0.8, 0.8, 1])
-
-    def __init__(self, **kwargs):
-        self.itemsList = []
-        super().__init__(**kwargs)
-
-    def add_widget(self, item, index=0):
-        if not isinstance(item, MenuItem):
-            raise TypeError("MenuBar accepts only MenuItem widgets")
-        super().add_widget(item, index)
-        if index == 0:
-            index = len(self.itemsList)
-        self.itemsList.insert(index, item)
+        # self.streeta = imgpath
+        # Clock.schedule_interval(self., 1.0 / 60.0)
+        # w, h = 2, 4;
+        # density = [[0 for x in range(w)] for y in range(h)]
+        #
+        # img_data = ObjectProperty()
+        # img_data = generateImageArray()
+        #
+        # self.streeta = img_data[0]
+        # self.streetb = img_data[1]
+        # self.streetc = img_data[2]
+        # self.streetd = img_data[3]
+        #
+        #
+        #
+        # for x in range(0, 4):
+        #     imgCountVar = countVehicles(img_data[x]);
+        #     density[x][0] = imgCountVar;
+        #     density[x][1] = x;
+        # print(density)
+        # density.sort(key=lambda x: x[0], reverse=True)
+        # print(density)
+        # timeAllot = [0 for x in range(4)]
+        #
+        # db = sqlite3.connect("database.db")
+        # c = db.cursor()
+        #
+        # temp = 0
+        # for i in range(0, 4):
+        #     if (density[i][0] <= 3):
+        #         timeAllot[i] = 30
+        #     elif (density[i][0] > 3 and density[i][0] <= 5):
+        #         timeAllot[i] = 60
+        #     elif (density[i][0] > 5):
+        #         timeAllot[i] = 120
+        #
+        #     if not i is 0:
+        #         temp = temp + timeAllot[i - 1]
+        #     if i is 0:
+        #         dateTimeAllot = datetime.datetime.now()
+        #     else:
+        #         dateTimeAllot = datetime.datetime.now() + datetime.timedelta(0,
+        #                                                                      temp)  # days, seconds, then other fields.
+        #     c.execute(
+        #         "INSERT INTO density ('areaID', 'roadID', 'count','rec_time','density','congestion',"
+        #         "'greenDur','trafficFlow') VALUES(1, ?, ?, ?, ?, ?, ?, ? )",
+        #         (density[i][1], density[i][0], datetime.datetime.now(), calDensity(density[i][0], 2),
+        #          calCongestion(datetime.datetime.now(), dateTimeAllot), timeAllot[i],
+        #          calTrafficFlow(density[i][0], timeAllot[i])))
+        #
+        # db.commit()
+        # c.close()
+        # db.close()
+        # print(timeAllot)
+        #
+        # timeString = ""
+        #
+        # for i in range(0, 4):
+        #     print('Road No: ' + str(density[i][1]) + ' Go GREEN for ' + str(timeAllot[i]) + 'seconds')
+        #     timeString = timeString + 'Road No: ' + str(density[i][1]) + ' Go GREEN for ' + str(timeAllot[i]) + 'seconds'
+        #
+        # self.ids['time_text'].text = timeString

@@ -10,64 +10,71 @@ from kivy.uix.screenmanager import ScreenManager, Screen, SlideTransition
 
 
 from kivy.core.window import Window
+from kivy.base import EventLoop;
+
 
 from connected import Connected
 from options import Options
 from records import Records
+from live import Live
 
 Window.clearcolor = (1, 1, 0, 1)  #background color
 
 Window.size = 950,650         # window size
+#Window.set_title('Vision Based Traffic Light Control')
+#EventLoop.window.title = 'Vision Based Traffic Light Control'
 
 
 class Login(Screen):
 
+
     def do_login(self):
+
         app = App.get_running_app()
 
-        myusername = ObjectProperty()
         mypassword = ObjectProperty()
 
-        app.username = self.myusername.text
+
         app.password = self.mypassword.text
 
-        if (app.username=='admin' and app.password=='admin'):
-            self.manager.transition = SlideTransition(direction="left")
-            self.manager.current = 'connected'
+        print(app.password)
 
-            def resetForm(self):
-                self.ids['login'].text = ""
-                self.ids['password'].text = ""
+        if (app.password=='admin'):
+            self.manager.transition = SlideTransition(direction="left")
+            self.manager.current = 'live'
+            self.manager.get_screen('login').resetForm()
 
             #app.config.read(app.get_application_config())
             #app.config.write()
         else:
-            self.ids['label1'].text = "Incorrect username/password"
-
-            def resetForm(self):
-                self.ids['login'].text = ""
-                self.ids['password'].text = ""
+            self.ids['label1'].text = "Incorrect password"
+            self.ids['password'].text = ""
+            self.manager.get_screen('login').resetForm()
 
 
     def resetForm(self):
         self.ids['login'].text = "admin"
-        self.ids['password'].text = "admin"
+        self.ids['password'].text = ""
+        self.ids['password'].focus = True
 
 class LoginApp(App):
     username = StringProperty(None)
     password = StringProperty(None)
 
-    App.title='Vision based Traffic Light control'
+    App.title = 'Vision Based Traffic Light Control'
 
     def build(self):
         manager = ScreenManager()
+
 
         manager.add_widget(Login(name='login'))
         manager.add_widget(Connected(name='connected'))
         manager.add_widget(Options(name='options'))
         manager.add_widget(Records(name='records'))
+        manager.add_widget(Live(name='live'))
 
         return manager
+
 """
     def get_application_config(self):
         if(not self.username):

@@ -235,7 +235,7 @@ class Records(Screen):
          plt.title('Line Graph\n')
          ax.plot(x, y, z, label='Duration of GREEN signal on road')
          plt.xlabel('X-axis (No of records=15)')
-         plt.ylabel('Y-axis (Congestion Time)')
+         plt.ylabel('Y-axis (Green Signal On Duration)')
 
          ax.legend()
 
